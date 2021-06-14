@@ -1,0 +1,9 @@
+name: "R<sup>3</sup>"
+navbar:
+  title: "R<sup>3</sup> Exercises"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Collaborate"
+      href: collaborate.html
+output_dir: "."

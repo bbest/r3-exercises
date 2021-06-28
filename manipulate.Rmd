@@ -1,0 +1,178 @@
+---
+title: "Manipulate"
+author: "Ben Best"
+date: "6/21/2021"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Read online table
+
+### Download table (`*.csv`)
+
+```{r}
+# set variables
+csv_url  <- "https://oceanview.pfeg.noaa.gov/erddap/tabledap/cciea_AC.csv"
+dir_data <- "data"
+
+# derived variables
+csv <- file.path(dir_data, basename(csv_url))
+
+# create directory
+dir.create(dir_data)
+
+# download file
+download.file(csv_url, csv)
+```
+
+### Read table `read.csv()`
+
+```{r}
+# attempt to read csv
+d <- read.csv(csv)
+
+# show the data frame
+d
+
+# convert to tibble
+tibble::tibble(d)
+
+# read csv by skipping first two lines, so no header
+d <- read.csv(csv, skip = 2, header = FALSE)
+tibble::tibble(d)
+
+# update data frame to original column names
+names(d) <- names(read.csv(csv))
+tibble::tibble(d)
+```
+
+```yaml
+editor_options: 
+  chunk_output_type: console
+```
+
+### Show table `DT::datatable()`
+
+```{r}
+# show table
+#DT::datatable(d)
+
+
+library(DT)
+datatable(d)
+```
+
+## Wrangle data
+
+### Manipulate with `dplyr`
+
+```{r}
+library(DT)
+library(dplyr)
+
+d <- d %>% 
+  # tibble
+  tibble() %>% 
+  # mutate time
+  mutate(
+    time = as.Date(substr(time, 1, 10))) %>% 
+  # select columns
+  select(
+    time, 
+    starts_with("total_fisheries_revenue")) %>% 
+  # filter rows
+  filter(
+    time >= as.Date("1981-01-01"))
+
+datatable(d)
+```
+
+### Tidy with `tidyr`
+
+```{r}
+library(tidyr)
+
+d <- d %>% 
+  pivot_longer(-time)
+
+datatable(d)
+```
+
+
+### Summarize with `dplyr`
+
+```{r}
+library(stringr)
+
+d <- d %>% 
+  mutate(
+    region = str_replace(name, "total_fisheries_revenue_", "")) %>% 
+  select(
+    time, region, value)
+datatable(d)
+
+d_sum <- d %>% 
+  group_by(region) %>% 
+  summarize(
+    avg_revenue = mean(value))
+datatable(d_sum) %>% 
+  formatCurrency("avg_revenue")
+```
+
+### Apply functions with `purrr` on a `nest`'ed `tibble`
+
+```{r}
+library(purrr)
+
+n <- d %>% 
+  group_by(region) %>% 
+  nest(
+    data = c(time, value)) %>% 
+  mutate(
+    # linear model
+    lm    = map(data,  function(d){
+      # in an anonymous function
+      lm(value ~ time, d) }),
+    # get trend from the model
+    trend = map_dbl(lm, function(m){
+      # using stats functions to extract coefficent
+      coef(summary(m))["time","Estimate"] }))
+
+
+n
+n %>% 
+  select(region, trend) %>% 
+  datatable()
+```
+
+### now with a loop
+
+```{r}
+n <- d %>% 
+  group_by(region) %>% 
+  nest(
+    data = c(time, value))
+n
+
+n$lm <- list()
+for (i in 1:nrow(n)){
+  message(glue::glue("i: {i}"))
+
+  n$lm[i] <- lm(value ~ time, n$data[[i]])
+}
+
+get_lm <- 
+
+n <- n %>% 
+  mutate(
+    lm    = map(data,  get_lm),
+    trend = map_dbl(lm, function(m){
+      coef(summary(m))["time","Estimate"] }))
+```
+
+

@@ -1,0 +1,219 @@
+---
+title: "Map"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = F, warning = F)
+```
+
+```{r}
+# require() is like library() except returns FALSE if missing (vs error)
+if (!require(librarian)){
+  install.packages("librarian")
+  library(librarian)
+}
+# librarian::shelf() is like library() except installs package if missing, 
+#   even from Github if include owner/repo
+shelf(
+  NOAA-EDAB/ecodata,
+  sf)
+# librarian before version 1.8.1, got error:
+#   download from 'https://api.github.com/repos/NOAA-EDAB/ecodata/tarball/HEAD' failed
+
+```
+
+## Get spatial data
+
+```{r}
+data(package="ecodata")
+
+?ecodata::epu_sf
+class(epu_sf)
+epu_sf
+
+epu_sf <- ecodata::epu_sf %>% 
+  st_transform(4326)
+
+
+g1 <- epu_sf$geometry[1]
+
+plot(epu_sf)
+
+plot(epu_sf["EPU"])
+```
+
+Where in the world is this?
+
+```{r}
+shelf(mapview)
+
+mapview(epu_sf)
+```
+
+```{r}
+shelf(leaflet)
+
+leaflet() %>% 
+  #addTiles() %>%
+  addProviderTiles(providers$Esri.OceanBasemap) %>% 
+  addPolygons(data = epu_sf)
+```
+
+```{r}
+shelf(
+  here,
+  rerddap)
+
+# get path for future caching
+sst_gd_rds <- here("data/sst_gd.rds")
+
+# get bounding box
+epu_bb <- st_bbox(epu_sf)
+epu_bb
+
+# erddap dataset info
+sst_info <- info('jplMURSST41mday')
+sst_info
+```
+
+```{r}
+if (!file.exists(sst_gd_rds)){
+  sst_gd <- griddap(
+    sst_info,
+    fields    = "sst",
+    time      = c("2020-06-16", "2021-06-16"),
+    longitude = epu_bb[c("xmin", "xmax")],
+    latitude  = epu_bb[c("ymin", "ymax")])
+  saveRDS(sst_gd, file = sst_gd_rds)
+}
+sst_gd <- readRDS(sst_gd_rds)
+
+sst_gd
+
+names(sst_gd)
+```
+
+
+## static plot
+
+```{r}
+shelf(
+  dplyr,
+  ggplot2,
+  mapdata)
+
+# coastline
+coast <- map_data(
+  "worldHires", 
+  xlim = epu_bb[c("xmin", "xmax")],
+  ylim = epu_bb[c("ymin", "ymax")],
+  lforce = "e")
+
+sst_df_last <- sst_gd$data %>%
+    filter(time == max(time))
+
+# summary(sst_df_last)
+
+ggplot(
+  data = sst_df_last, 
+  aes(x = lon, y = lat, fill = sst)) +
+  geom_polygon(
+    data = coast,
+    aes(x = long, y = lat, group = group), fill = "grey80") +
+  geom_tile() +
+  scale_fill_gradientn(
+    colors = rerddap::colors$temperature, na.value = NA) +
+  theme_bw() + 
+  ylab("Latitude") + 
+  xlab("Longitude") +
+  ggtitle("Latest SST")
+```
+
+## extract sst for this raster time series
+
+```{r}
+shelf(
+  purrr,
+  raster,
+  sp,
+  tidyr)
+select <- dplyr::select
+
+sst_tbl <- tibble(sst_gd$data) %>%
+  mutate(
+    # round b/c of uneven intervals
+    #   unique(sst_gd$data$lon) %>% sort() %>% diff() %>% table()
+    #     0.0099945068359375 0.0100021362304688
+    lon  = round(lon, 2),
+    lat  = round(lat, 2),
+    date = as.Date(time, "%Y-%m-%dT00:00:00Z")) %>%
+  select(-time) %>% 
+  filter(!is.na(sst)) # 13M to 8.8M rows
+
+tbl2raster <- function(x){
+  #browser()
+  sp::coordinates(x) <- ~ lon + lat
+  sp::gridded(x)     <- T
+  raster::raster(x)
+}
+
+sst_tbl_mo <- sst_tbl %>% 
+  nest(data = c(lat, lon, sst)) %>% 
+  mutate(
+    raster = purrr::map(data, tbl2raster))
+
+sst_stk <- raster::stack(sst_tbl_mo$raster)
+names(sst_stk) <- strftime(sst_tbl_mo$date, "sst_%Y.%m")
+raster::crs(sst_stk) <- 4326
+
+```
+
+```{r}
+shelf(stringr)
+
+epu_sst_avg <- raster::extract(sst_stk, epu_sf, fun = mean, na.rm = T)
+epu_sst_sd  <- raster::extract(sst_stk, epu_sf, fun = sd, na.rm = T)
+
+epu_sst_tbl <- rbind(
+  epu_sst_avg %>% 
+    as_tibble() %>% 
+    cbind(
+      EPU  = epu_sf$EPU,
+      stat = "mean") %>% 
+    pivot_longer(-c(EPU, stat)),
+  epu_sst_sd %>% 
+    as_tibble() %>% 
+    cbind(
+      EPU = epu_sf$EPU,
+      stat = "sd") %>% 
+    pivot_longer(-c(EPU, stat))) %>% 
+  mutate(
+    EPU  = as.character(EPU),
+    date = as.double(str_replace(name, "sst_", ""))) %>% 
+  select(-name) %>% 
+  pivot_wider(
+    names_from  = EPU, 
+    values_from = value)
+```
+
+```{r}
+shelf(dygraphs)
+
+epu_sst_tbl %>% 
+  filter(stat == "mean") %>% 
+  select(-stat) %>% 
+  dygraph()
+```
+
+
+```{r}
+necoast_shp <- "/Users/bbest/github/ecodata_bbest/data-raw/gis/NES_LME_coast.shp"
+
+necoast_sf <- sf::read_sf(necoast_shp)
+
+plot(necoast_sf)
+```
+

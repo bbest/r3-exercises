@@ -143,14 +143,14 @@ n <- d %>%
       # using stats functions to extract coefficent
       coef(summary(m))["time","Estimate"] }))
 
-
-n
 n %>% 
   select(region, trend) %>% 
   datatable()
 ```
 
 ### now with a loop
+
+TBD...
 
 ```{r}
 n <- d %>% 
@@ -159,20 +159,20 @@ n <- d %>%
     data = c(time, value))
 n
 
-n$lm <- list()
-for (i in 1:nrow(n)){
-  message(glue::glue("i: {i}"))
-
-  n$lm[i] <- lm(value ~ time, n$data[[i]])
-}
-
-get_lm <- 
-
-n <- n %>% 
-  mutate(
-    lm    = map(data,  get_lm),
-    trend = map_dbl(lm, function(m){
-      coef(summary(m))["time","Estimate"] }))
+# n$lm <- list()
+# for (i in 1:nrow(n)){
+#   message(glue::glue("i: {i}"))
+# 
+#   n$lm[i] <- lm(value ~ time, n$data[[i]])
+# }
+# 
+# get_lm <- 
+# 
+# n <- n %>% 
+#   mutate(
+#     lm    = map(data,  get_lm),
+#     trend = map_dbl(lm, function(m){
+#       coef(summary(m))["time","Estimate"] }))
 ```
 
 

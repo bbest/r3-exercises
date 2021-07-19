@@ -11,7 +11,7 @@ params:
 Source: [Alaska Marine Ecosystem Status Reports](https://apps-afsc.fisheries.noaa.gov/refm/reem/ecoweb/Index.php?ID=9)
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message = F)
+knitr::opts_chunk$set(echo = FALSE, message = F, warning = F)
 ```
 
 ```{r}

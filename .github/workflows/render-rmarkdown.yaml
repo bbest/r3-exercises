@@ -1,8 +1,8 @@
 name: render_report-website
 on:
-  push:
+  #push:
   schedule:            
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * *' # once per month
   workflow_dispatch:
 
 jobs:

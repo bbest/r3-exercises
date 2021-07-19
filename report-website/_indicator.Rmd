@@ -1,0 +1,25 @@
+---
+title: "`r params$idx_region`: `r params$idx_name`"
+pagetitle: "`r params$idx_region`: `r params$idx_name` | Alaska Marine Indicators"
+output: html_document
+params:
+  idx_region: "Eastern Bering Sea"
+  idx_name: "North Pacific Index"
+  idx_csv: "../data/alaska/NPI.csv"
+---
+
+Source: [Alaska Marine Ecosystem Status Reports](https://apps-afsc.fisheries.noaa.gov/refm/reem/ecoweb/Index.php?ID=9)
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = F)
+```
+
+```{r}
+librarian::shelf(
+  dplyr, dygraphs, readr)
+
+read_csv(params$idx_csv) %>% 
+  dygraph(xlab = "Year")
+```
+
+Last updated: `r Sys.time()`

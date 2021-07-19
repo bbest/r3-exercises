@@ -1,0 +1,39 @@
+---
+title: "Alaska Marine Indicators"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+Source: [Alaska Marine Ecosystem Status Reports](https://apps-afsc.fisheries.noaa.gov/refm/reem/ecoweb/Index.php?ID=9)
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, message = F)
+```
+
+```{r}
+# libraries
+if (!require("librarian")){
+  install.packages("librarian")
+  library(librarian)
+}
+shelf(
+  dplyr, DT, glue, here, readr)
+
+dir_data <- here("data/alaska")
+idxs_csv <- glue("{dir_data}/_indicators.csv")
+
+idxs_tbl <- read_csv(idxs_csv, col_types = cols())
+
+idxs_tbl %>% 
+  mutate(
+    Indicator = glue("<a href='./z_{idx}.html'>{name}</a>")) %>% 
+  select(Region = region, Indicator) %>% 
+  datatable(
+    escape = F,
+    extensions = 'RowGroup',
+    options = list(
+      rowGroup   = list(dataSrc = 1),
+      columnDefs = list(list(visible=FALSE, targets=c(1)))),
+    selection = 'none')
+```

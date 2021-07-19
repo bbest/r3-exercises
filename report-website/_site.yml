@@ -1,0 +1,4 @@
+name: "Alaska IEA Indicators"
+navbar:
+  title: "AK website"
+output_dir: "."

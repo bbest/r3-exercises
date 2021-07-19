@@ -1,0 +1,8 @@
+
+### {{name}}
+
+```{r}
+read_csv("{{data_csv}}") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+

@@ -1,0 +1,472 @@
+---
+title: "AK dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    vertical_layout: scroll
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = F)
+```
+
+```{r}
+if (!require("librarian")){
+  install.packages("librarian")
+  library(librarian)
+}
+shelf(
+  dplyr, dygraphs, DT, flexdashboard, glue, here, readr)
+```
+
+
+
+
+# Eastern Bering Sea
+
+
+### North Pacific Index
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/NPI.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Sea Ice Extent
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/IceExtent.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Euphausiid biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/Euphs.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Motile epifauna biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/Epifauna.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Benthic forager biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/Benthic.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Pelagic forager biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/Pelagic.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Apex predator biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/Apex.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Multivariate seabird breeding index (PC1)
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/Seabird.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### St. Paul N. Fur seal pups born
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/Fur.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Habitat impacted by trawls
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/Trawl.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+# Western AI
+
+
+### Least Auklet reproductive success
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WAI_Least.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Crested Auklet reproductive success
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WAI_Crest.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Ammodytes in Tufted Puffin diet
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WAI_PSL.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Gadids in Tufted Puffin diet
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WAI_Gad.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Hexagrammids in Tufted Puffin diet
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WAI_Hex.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Pelagic forager biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WAI_Pelagic.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Apex predator biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WAI_Apex.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Otters at Attu
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WAI_Ott.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### SSL non pup counts
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WAI_SSL.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Habitat Impacted by Trawls
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WAI_Trawl.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+# Central AI
+
+
+### Pelagic forager biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/CAI_Pelagic.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Apex predator biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/CAI_Apex.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Otters at Amchitka
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/CAI_Ott.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### SSL non pup counts
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/CAI_SSL.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### School Enrollment
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/CAI_School.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Habitat Impacted by Trawls
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/CAI_Trawl.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+# Eastern AI
+
+
+### Ammodytes in Tufted Puffin diet
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EAI_PSL.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Gadids in Tufted Puffin diet
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EAI_Gad.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Hexagrammids in Tufted Puffin diet
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EAI_Hex.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Pelagic forager biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EAI_Pelagic.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Apex predator biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EAI_Apex.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### SSL non pup counts
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EAI_SSL.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### School Enrollment
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EAI_School.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Habitat Impacted by Trawls
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EAI_Trawl.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+# Western Gulf of Alaska
+
+
+### Pacific Decadal Oscillation winter
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WGOA_PDO.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### SST Jun-Aug
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WGOA_SST.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Mesoplankton Biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WGOA_Meso.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Copepod Community Size
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WGOA_Cope.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Motile Epifauna Biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WGOA_Epi.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Capelin(puffins)
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WGOA_Capelin.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Apex Fish Biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WGOA_Apex.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Black-legged Kittiwake Reproductive Success
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WGOA_Blk.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Stellar Sea Lion Non-pups
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WGOA_SSL.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Human Population
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/WGOA_Human.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+# Eastern Gulf of Alaska
+
+
+### Multivariate ENSO index (MEI DecJan)
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EGOA_ENSO.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### SST Jun-Aug
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EGOA_SST.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Zooplankton Density Icy Strait (#/m3)
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EGOA_Zoop.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Copepod Community Size
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EGOA_Cope.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Motile Epifauna Biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EGOA_Epi.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### SE Alaska Herring Mature Biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EGOA_Herring.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Apex Fish Biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EGOA_Apex.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Rhinoceros Auklet Chick Growth
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EGOA_Auk.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Stellar Sea Lion Non-pups
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EGOA_SSL.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Human Population
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/EGOA_Human.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+

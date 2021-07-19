@@ -1,0 +1,22 @@
+---
+title: "AK dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    vertical_layout: scroll
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = F)
+```
+
+```{r}
+if (!require("librarian")){
+  install.packages("librarian")
+  library(librarian)
+}
+shelf(
+  dplyr, dygraphs, DT, flexdashboard, glue, here, readr)
+```
+
+
+

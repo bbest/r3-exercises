@@ -15,4 +15,4 @@ knitr::opts_chunk$set(echo = TRUE)
 
 -   [slides](report-slides.html)
 
--   [article](report-article/)
+-   [article](report-article/report-article.pdf)

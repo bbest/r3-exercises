@@ -59,7 +59,7 @@ p_coast
 
 ```{r}
 p_coast + 
-  geom_smooth(method = "loess")
+  geom_smooth(method = "lm")
 ```
 ### 3.2.3 Distribution of values + geom_histogram()
 

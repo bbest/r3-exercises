@@ -41,7 +41,7 @@ idxs_tbl <- tibble(
     region   = rgns[rgn],
     meta_yml = glue("{dir_data}/{idx}.yml"),
     data_csv = glue("{dir_data}/{idx}.csv")) %>%
-  select(rgn, idx, region, name, url, meta_yml, data_csv, html)
+  select(rgn, idx, region, name, url, meta_yml, data_csv)
 dir.create(dir_data, showWarnings = F, recursive = T)
 write_csv(idxs_tbl, idxs_csv)
 

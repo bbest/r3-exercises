@@ -1,4 +1,5 @@
-book_filename: "report-book"
+output_dir: "."
+book_filename: "alaska-book"
 delete_merged_file: true
 language:
   ui:

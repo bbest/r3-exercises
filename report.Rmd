@@ -1,0 +1,18 @@
+---
+title: "Report"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+-   [website](report-website/)
+
+-   [dashboard](report-dashboard)
+
+-   [book](report-book)
+
+-   [slides](report-slides.html)
+
+-   [article](report-article/)

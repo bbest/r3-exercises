@@ -47,7 +47,7 @@ write_csv(idxs_tbl, idxs_csv)
 
 # write indicators to data/ folder
 idxs_tbl %>% 
-  pwalk(
+  purrr::pwalk(
     function(idx, url, meta_yml, data_csv, ...){
       # get table
       d <- read_html(url) %>% 

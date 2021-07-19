@@ -4,7 +4,7 @@ if (!require("librarian")){
   library(librarian)
 }
 shelf(
-  dplyr, glue, here, purrr, readr)
+  dplyr, glue, here, purrr, readr, rmarkdown)
 
 # variables ----
 
@@ -18,12 +18,12 @@ idx_rmd  <- glue("{dir_web}/_indicator.Rmd")
 
 # read indicators ----
 
-idxs_tbl <- read_csv(idxs_csv, col_types = cols())
+idxs_tbl <- readr::read_csv(idxs_csv, col_types = cols())
 
 # write html page per indicator ----
 
 idxs_tbl %>% 
-  pwalk(function(idx, region, name, data_csv, ...){
+  purrr::pwalk(function(idx, region, name, data_csv, ...){
     # output html file
     out_htm <- glue("{dir_web}/z_{idx}.html")
     

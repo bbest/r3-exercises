@@ -13,7 +13,7 @@ dir_data <- here("data/alaska")
 idxs_csv <- glue("{dir_data}/_indicators.csv")
 
 # output website
-dir_web  <- here("report_website")
+dir_web  <- here("report-website")
 idx_rmd  <- glue("{dir_web}/_indicator.Rmd")
 
 # read indicators ----

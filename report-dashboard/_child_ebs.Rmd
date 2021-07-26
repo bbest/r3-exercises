@@ -1,0 +1,78 @@
+### North Pacific Index
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/NPI.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Sea Ice Extent
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/IceExtent.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Euphausiid biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/Euphs.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Motile epifauna biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/Epifauna.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Benthic forager biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/Benthic.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Pelagic forager biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/Pelagic.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Apex predator biomass
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/Apex.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Multivariate seabird breeding index (PC1)
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/Seabird.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### St. Paul N. Fur seal pups born
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/Fur.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```
+
+
+### Habitat impacted by trawls
+
+```{r}
+read_csv("/Users/bbest/github/bbest/r3-exercises/data/alaska/Trawl.csv") %>% 
+  dygraph(xlab = "Year", group = "sync")
+```

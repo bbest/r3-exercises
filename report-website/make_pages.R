@@ -27,6 +27,8 @@ idxs_tbl %>%
     # output html file
     out_htm <- glue("{dir_web}/z_{idx}.html")
     
+    browser()
+    
     # render from indicator Rmd template into html
     rmarkdown::render(
       idx_rmd,

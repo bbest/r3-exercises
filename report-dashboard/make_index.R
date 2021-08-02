@@ -17,10 +17,12 @@ readLines("_index.Rmd") %>%
   writeLines("index.Rmd")
 
 region_previous <- ""
-for (i in 1:nrow(idxs_tbl)){ # i = 1
+for (i in 1:nrow(idxs_tbl)){ # i = 2
   attach(idxs_tbl[i,])
   
   message(glue("idx: {idx}"))
+  
+  # browser()
           
   if (region != region_previous){
     glue("\n\n# {region}\n\n") %>% 

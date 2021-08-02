@@ -1,0 +1,83 @@
+---
+title: "Report with Rmd options"
+author: "Ben Best"
+date: "7/19/2021"
+output: 
+  html_document: 
+    toc: yes
+    toc_float: true
+    code_folding: hide
+    number_sections: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE)
+```
+
+# R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for [example](https://google.com):
+
+-   a
+
+-   b
+
+-   c
+
+$$
+E = m c^2
+$$
+
+```{r}
+knitr::kable(pressure)
+```
+
+```{r pressure, echo=T}
+plot(pressure)
+```
+
++--------+-----------+------------------------+-------------------------------------------+
+| rgn    | idx       | region                 | name                                      |
++========+===========+========================+===========================================+
+| EBS    | NPI       | Eastern Bering Sea     | North Pacific Index                       |
++--------+-----------+------------------------+-------------------------------------------+
+| EBS    | IceExtent | Eastern Bering Sea     | Sea Ice Extent                            |
++--------+-----------+------------------------+-------------------------------------------+
+| EBS    | Euphs     | Eastern Bering Sea     | Euphausiid biomass                        |
++--------+-----------+------------------------+-------------------------------------------+
+| EBS    | Epifauna  | Eastern Bering Sea     | Motile epifauna biomass                   |
++--------+-----------+------------------------+-------------------------------------------+
+| EBS    | Benthic   | Eastern Bering Sea     | Benthic forager biomass                   |
++--------+-----------+------------------------+-------------------------------------------+
+| EBS    | Pelagic   | Eastern Bering Sea     | Pelagic forager biomass                   |
++--------+-----------+------------------------+-------------------------------------------+
+| EBS    | Apex      | Eastern Bering Sea     | Apex predator biomass                     |
++--------+-----------+------------------------+-------------------------------------------+
+| EBS    | Seabird   | Eastern Bering Sea     | Multivariate seabird breeding index (PC1) |
++--------+-----------+------------------------+-------------------------------------------+
+| EBS    | Fur       | Eastern Bering Sea     | St. Paul N. Fur seal pups born            |
++--------+-----------+------------------------+-------------------------------------------+
+| EBS    | Trawl     | Eastern Bering Sea     | Habitat impacted by trawls                |
++--------+-----------+------------------------+-------------------------------------------+
+| WAI    | WAI_Least | Western AI             | Least Auklet reproductive success         |
++--------+-----------+------------------------+-------------------------------------------+
+
+\
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+# Test
+
+## Here
+
+### Again

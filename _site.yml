@@ -14,4 +14,6 @@ navbar:
       href: map.html
     - text: "Report"
       href: report.html
+    - text: "Infographics"
+      href: infographics.html
 output_dir: "."

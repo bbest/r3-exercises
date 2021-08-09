@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Hello, World! — hello • mypkg</title>
+<title>Hello, name! — hello • mypkg</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Hello, World! — hello" />
+<meta property="og:title" content="Hello, name! — hello" />
 <meta property="og:description" content="Prints 'Hello, name!'" />
 
 
@@ -106,7 +106,7 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Hello, World!</h1>
+    <h1>Hello, name!</h1>
     
     <div class="hidden name"><code>hello.Rd</code></div>
     </div>
@@ -115,14 +115,14 @@
     <p>Prints 'Hello, name!'</p>
     </div>
 
-    <pre class="usage"><span class='fu'>hello</span><span class='op'>(</span><span class='va'>name</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>hello</span><span class='op'>(</span>name <span class='op'>=</span> <span class='st'>"World"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>name</th>
-      <td><p>who to greet</p></td>
+      <td><p>who to greet; defaults to "World"</p></td>
     </tr>
     </table>
 
@@ -132,7 +132,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>hello</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in eval(parse(text = text, keep.source = FALSE), envir): argument "name" is missing, with no default</span></div></pre>
+</div><div class='output co'>#&gt; Hello, World!</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

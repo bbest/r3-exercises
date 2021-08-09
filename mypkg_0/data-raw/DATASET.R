@@ -1,4 +1,4 @@
-# create data object, such as a dataframe of exponential growth
+# create data object
 df_exp <- data.frame(
   x = 1:10,
   y = (1:10)^2)

@@ -18,7 +18,6 @@ knitr::opts_chunk$set(
 library(mypkg)
 ```
 
-
 ## Hello
 
 This is my first package. Let's start with hello.
@@ -43,3 +42,7 @@ And created this plotting function:
 ```{r}
 ts_plot(df_exp)
 ```
+
+
+
+

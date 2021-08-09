@@ -2,12 +2,12 @@
 % Please edit documentation in R/hello.R
 \name{hello}
 \alias{hello}
-\title{Hello, {name}!}
+\title{Hello, World!}
 \usage{
-hello(name = "World")
+hello(name)
 }
 \arguments{
-\item{name}{who to greet; defaults to "World"}
+\item{name}{who to greet}
 }
 \value{
 a string

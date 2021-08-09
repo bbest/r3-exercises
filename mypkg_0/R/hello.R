@@ -13,18 +13,18 @@
 #   Check Package:             'Cmd + Shift + E'
 #   Test Package:              'Cmd + Shift + T'
 
-#' Hello, {name}!
+#' Hello, World!
 #'
 #' Prints 'Hello, {name}!'
 #'
-#' @param name who to greet; defaults to "World"
+#' @param name who to greet
 #'
 #' @return a string
-#' @importFrom glue glue
 #' @export
+#' @importFrom glue glue
 #'
 #' @examples
 #' hello()
-hello <- function(name = "World") {
+hello <- function(name) {
   print(glue::glue("Hello, {name}!"))
 }
